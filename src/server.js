@@ -1,7 +1,7 @@
 const net = require('node:net');
 
 // Socket[Duplex Stream] Connections
-const sockets = [];
+const socketConnections = [];
 
 // Event Emitter Object
 const server = net.createServer();
@@ -9,10 +9,10 @@ const server = net.createServer();
 // Event Handlers
 server.on('connection', (serverSocket) => {
   console.log(`${serverSocket.remoteAddress}:${serverSocket.remotePort} connected`);
-  sockets.push(serverSocket);
+  socketConnections.push(serverSocket);
 
   serverSocket.on('data', (data) => {
-    for (const socket of sockets) {
+    for (const socket of socketConnections) {
       const userInfo = socket.remotePort + ':' + socket.remoteAddress;
       socket.write(`${userInfo}: ${data.toString('utf8')}`);
     }
