@@ -10,7 +10,7 @@ const clearLine = (direction) => {
   // Process.stdout is a WriteStream.
   // dir = 1; clears everything to the right from cursor
   // dir = -1; clears everything to the left from cursor
-  // dir = 0; clears entire line
+  // dir = 0; clears the entire line
   
   return new Promise((resolve) => {
     process.stdout.clearLine(direction, () => {
@@ -36,7 +36,7 @@ const clientSocket = net.createConnection({
   const ask = async () => {
     const message = await rl.question('Enter your message: ');
     await moveCursor(0, -1);
-    // clear the current line where cursor is at
+    // clear the current line where the cursor is at
     await clearLine(0);
     clientSocket.write(message);
   };
